@@ -16,7 +16,6 @@ function fibs(number) {
     return array;
   }
 }
-//test
 //write recursive fib function
 
 function fibsRec(n) {
