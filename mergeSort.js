@@ -10,27 +10,35 @@
 
 function mergeSort(array) {
   if (array.length === 1) {
-    console.log("Exit: " + array);
+    // console.log("Exit: " + array);
     return array;
   } else {
-    console.log("Input: " + array);
+    // console.log("Input: " + array);
     const midpoint = Math.trunc(array.length / 2);
-    const left = array.slice(0, midpoint);
-    const right = array.slice(midpoint);
-    console.log("Left: " + left + " Right: " + right);
+    const left = mergeSort(array.slice(0, midpoint));
+    const right = mergeSort(array.slice(midpoint));
+    // console.log("Left: " + left + " Right: " + right);
 
     const newArray = [];
-    const leftValue = mergeSort(left)[0];
-    const rightValue = mergeSort(right)[0];
+    const lenLeft = left.length;
+    const lenRight = right.length;
+    let i = 0;
+    let j = 0;
 
-    if (leftValue < rightValue) {
-      newArray.push(leftValue);
-      newArray.push(rightValue);
-    } else {
-      newArray.push(rightValue);
-      newArray.push(leftValue);
+    while (i < lenLeft && j < lenRight) {
+      if (left[i] < right[j]) {
+        newArray.push(left[i++]);
+      } else {
+        newArray.push(right[j++]);
+      }
     }
-    console.log("Newarray: " + newArray);
+    for (i; i < lenLeft; i++) {
+      newArray.push(left[i]);
+    }
+    for (j; j < lenRight; j++) {
+      newArray.push(right[j]);
+    }
+
     return newArray;
   }
 }
